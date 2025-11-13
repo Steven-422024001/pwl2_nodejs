@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Kategori</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Daftar Kategori</h1>
+        <a href="/" class="btn btn-secondary mb-3">Kembali ke Home</a>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nama Kategori</th>
+                </tr>
+            </thead>
+            <tbody>
+                                <% if (categories && categories.length > 0) { %>
+                    <% categories.forEach(category => { %>
+                        <tr>
+                            <td><%= category.id %></td>
+                            <td><%= category.nama_kategori %></td>                         </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="2">Tidak ada data kategori.</td>
+                    </tr>
+  _             <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

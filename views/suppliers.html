@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Supplier</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Daftar Supplier</h1>
+        <a href="/" class="btn btn-secondary mb-3">Kembali ke Home</a>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nama Supplier</th>
+                    <th>Nama Kontak</th>
+                    <th>Alamat</th>
+                    <th>Telepon</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (suppliers && suppliers.length > 0) { %>
+                    <% suppliers.forEach(supplier => { %>
+                        <tr>
+                            <!-- Data disesuaikan dengan JSON -->
+                            <td><%= supplier.id %></td>
+                            <td><%= supplier.supplier_name %></td>
+                            <td><%= supplier.contact_name %></td>
+                            <td><%= supplier.address %></td>
+                  _         <td><%= supplier.phone %></td>
+                            <td><%= supplier.status %></td>
+                        </tr>
+        _           <% }); %>
+                <% } else { %>
+                    <tr>
+                        <!-- Colspan diubah jadi 6 (sesuai jumlah kolom) -->
+                        <td colspan="6">Tidak ada data supplier.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
