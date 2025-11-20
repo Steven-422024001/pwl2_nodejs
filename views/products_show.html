@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk</title>
+    <!-- Memuat Bootstrap dari CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card-detail {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        .detail-item strong {
+            display: inline-block;
+            width: 150px; /* Menyelaraskan label */
+        }
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Detail Produk</h1>
+
+        <div class="card-detail mx-auto" style="max-width: 600px;">
+            <div class="card-body">
+                <p class="text-center">
+                    <!-- Tampilkan Gambar Produk -->
+                    <% if (product.image) { %>
+                        <img src="<%= product.image %>" alt="<%= product.title %>" class="product-image">
+                    <% } else { %>
+                        <img src="https://placehold.co/200x200/cccccc/333333?text=No+Image" alt="No Image" class="product-image">
+                    <% } %>
+                </p>
+                
+                <p class="detail-item"><strong>ID:</strong> <%= product.id %></p>
+                <p class="detail-item"><strong>Nama Produk:</strong> <%= product.title %></p>
+                <p class="detail-item"><strong>Deskripsi:</strong> <%= product.description %></p>
+                <p class="detail-item"><strong>Harga:</strong> Rp. <%= product.price.toLocaleString('id-ID') %></p>
+                <p class="detail-item"><strong>Stok:</strong> <%= product.stock %></p>
+                <p class="detail-item"><strong>Kategori ID:</strong> <%= product.product_category_id %></p>
+                <p class="detail-item"><strong>Supplier ID:</strong> <%= product.supplier_id %></p>
+                <p class="detail-item"><strong>Dibuat Pada:</strong> <%= new Date(product.created_at).toLocaleString() %></p>
+                <p class="detail-item"><strong>Diperbarui Pada:</strong> <%= new Date(product.updated_at).toLocaleString() %></p>
+            </div>
+        </div>
+
+        <div class="mt-4 text-center">
+            <a href="/products" class="btn btn-primary">Kembali ke Daftar Produk</a>
+            <a href="/products/<%= product.id %>/edit" class="btn btn-warning">Edit Produk</a>
+            
+            <form action="/products/<%= product.id %>?_method=DELETE" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">Hapus Produk</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

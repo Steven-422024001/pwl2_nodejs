@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Produk: <%= product.title %></title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Edit Produk: <%= product.title %></h1>
+        
+        <!-- Form menggunakan method POST dengan spoofing _method=PUT -->
+        <form action="/products/<%= product.id %>?_method=PUT" method="POST" class="mt-4">
+            
+            <!-- 1. Nama Produk (title) -->
+            <div class="form-group">
+                <label for="title">Nama Produk</label>
+                <input type="text" id="title" name="title" class="form-control" value="<%= product.title %>" required>
+            </div>
+
+            <!-- 2. Deskripsi -->
+            <div class="form-group">
+                <label for="description">Deskripsi</label>
+                <textarea id="description" name="description" class="form-control" rows="3" required><%= product.description %></textarea>
+            </div>
+
+            <!-- 3. Harga -->
+            <div class="form-group">
+                <label for="price">Harga</label>
+                <input type="number" id="price" name="price" class="form-control" value="<%= product.price %>" required>
+            </div>
+
+            <!-- 4. Stok -->
+            <div class="form-group">
+                <label for="stock">Stok</label>
+                <input type="number" id="stock" name="stock" class="form-control" value="<%= product.stock %>" required>
+            </div>
+
+            <!-- 5. Kategori ID -->
+            <div class="form-group">
+                <label for="product_category_id">Kategori ID</label>
+                <input type="number" id="product_category_id" name="product_category_id" class="form-control" value="<%= product.product_category_id %>" required>
+            </div>
+
+            <!-- 6. Supplier ID -->
+            <div class="form-group">
+                <label for="supplier_id">Supplier ID</label>
+                <input type="number" id="supplier_id" name="supplier_id" class="form-control" value="<%= product.supplier_id %>" required>
+            </div>
+            
+            <!-- 7. Image (Asumsi hanya string/path yang diupdate) -->
+            <div class="form-group">
+                <label for="image">Path Gambar</label>
+                <!-- Tampilkan gambar saat ini -->
+                <div class="mb-2">
+                     <img src="http://127.0.0.1:8000/storage/<%= product.image %>" 
+                        alt="Current Image" 
+                        style="max-width: 150px; height: auto; border-radius: 4px;">
+                </div>
+                <input type="text" id="image" name="image" class="form-control" value="<%= product.image %>" placeholder="Masukkan path/nama file gambar baru">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+            <a href="/products" class="btn btn-secondary">Batal</a>
+        </form>
+    </div>
+</body>
+</html>
